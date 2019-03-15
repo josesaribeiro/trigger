@@ -39,6 +39,13 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".QRPresenterActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QRScanActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ssh.KeyPairActivity"
             android:label="Manage SSH Key Pair"
             android:screenOrientation="portrait" >
