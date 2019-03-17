@@ -36,7 +36,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-
+/*
 public class QRScanActivity extends AppCompatActivity implements BarcodeCallback, ServiceConnection{
     private DecoratedBarcodeView barcodeView;
     private MainService.MainBinder binder;
@@ -169,3 +169,4 @@ public class QRScanActivity extends AppCompatActivity implements BarcodeCallback
         binder = null;
     }
 }
+*/

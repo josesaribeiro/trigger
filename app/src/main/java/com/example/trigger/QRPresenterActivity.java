@@ -29,8 +29,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-public class QRPresenterActivity extends AppCompatActivity implements ServiceConnection{
+/*
+public class QRPresenterActivity extends AppCompatActivity implements ServiceConnection {
     private MainService.MainBinder binder;
     private String json;
 
@@ -136,17 +136,6 @@ public class QRPresenterActivity extends AppCompatActivity implements ServiceCon
         return object.toString();
     }
 
-    /*private String getLinkLocalAddress() throws Exception{
-        WifiManager wm = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        WifiInfo info = wm.getConnectionInfo();
-        if(info == null){
-            throw new Exception("Device needs to be connected to WIFI");
-        }
-        String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
-
-        return ip;
-    }*/
-
     @Override
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         Log.d(QRPresenterActivity.class.getSimpleName(), "onServiceConnected " + (iBinder == null));
@@ -174,3 +163,4 @@ public class QRPresenterActivity extends AppCompatActivity implements ServiceCon
         }
     };
 }
+*/
