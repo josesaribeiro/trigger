@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_above="@id/fabScan"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="20dp"
         app:srcCompat="@android:drawable/ic_menu_edit"
         android:background="@color/colorPrimary" />
 
@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/qr"
+        android:layout_margin="20dp"
+        app:srcCompat="@drawable/qr_present"
         android:background="@color/colorPrimary" />
 
 </RelativeLayout>

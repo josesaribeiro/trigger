@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
@@ -47,34 +48,47 @@ public class QRScanActivity extends AppCompatActivity implements BarcodeCallback
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
-        }else {
+        } else {
             bindService(new Intent(this, MainService.class), this, Service.BIND_AUTO_CREATE);
         }
 
-        findViewById(R.id.fabScan).setOnClickListener(view -> {
-            startActivity(new Intent(this, QRPresenterActivity.class));
-            finish();
+        findViewById(R.id.fabScan).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(this, QRPresenterActivity.class));
+                finish();
+            }
         });
-        findViewById(R.id.fabManualInput).setOnClickListener(view -> {
-            startManualInput();
+
+        findViewById(R.id.fabManualInput).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startManualInput();
+            }
         });
     }
 
     private void startManualInput(){
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         EditText et = new EditText(this);
-        b.setTitle(R.string.paste_invitation)
-                .setPositiveButton("ok", (dialogInterface, i) -> {
+        b.setTitle("Paste Invitation")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                     try {
                         handleJson(et.getText().toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(this, R.string.invalid_data, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Invalid Data", Toast.LENGTH_SHORT).show();
                     }
                     finish();
-                })
-                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.cancel())
-                .setView(et);
+                }
+            })
+            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            })
+            .setView(et);
         b.show();
     }
 
@@ -84,7 +98,7 @@ public class QRScanActivity extends AppCompatActivity implements BarcodeCallback
         if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
             bindService(new Intent(this, MainService.class), this, Service.BIND_AUTO_CREATE);
         }else{
-            Toast.makeText(this, R.string.camera_permission_request, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Camera permission Request", Toast.LENGTH_LONG).show();
             finish();
         }
     }

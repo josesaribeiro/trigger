@@ -34,6 +34,8 @@ public class QRPresenterActivity extends AppCompatActivity implements ServiceCon
     private MainService.MainBinder binder;
     private String json;
 
+    static class Contact {};
+
     private Contact contact = null;
 
     @Override
@@ -51,21 +53,27 @@ public class QRPresenterActivity extends AppCompatActivity implements ServiceCon
             findViewById(R.id.fabShare).setLayoutParams(params);
         }
 
-        setTitle(getString(R.string.scan_invitation));
+        setTitle("Scan_invitation");
         bindService();
 
-        findViewById(R.id.fabPresenter).setOnClickListener(view -> {
-            startActivity(new Intent(this, QRScanActivity.class));
-            finish();
+        findViewById(R.id.fabPresenter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(this, QRScanActivity.class));
+                finish();
+            }
         });
 
 
-        findViewById(R.id.fabShare).setOnClickListener(view -> {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.putExtra(Intent.EXTRA_TEXT, json);
-            i.setType("text/plain");
-            startActivity(i);
-            finish();
+        findViewById(R.id.fabShare).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.putExtra(Intent.EXTRA_TEXT, json);
+                i.setType("text/plain");
+                startActivity(i);
+                finish();
+            }
         });
 
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("incoming_contact"));
