@@ -54,16 +54,18 @@ public class BluetoothRequestHandler extends AsyncTask<Object, Void, DoorReply> 
             String request = "";
             String response = "";
 
-            if (bluetooth.isEnabled()) {
-                String mydeviceaddress = bluetooth.getAddress();
-                String mydevicename = bluetooth.getName();
-                String state = "" + bluetooth.getState();
-                Log.d("Bluetooth", "myself: " + mydevicename + " : " + mydeviceaddress + " " + state);
-            } else {
+            if (bluetooth == null) {
+                return new DoorReply(ReplyCode.LOCAL_ERROR, "Device does not support bluetooth");
+            } else if (!bluetooth.isEnabled()) {
                 // request to enable
                 //Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 //startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                 return new DoorReply(ReplyCode.LOCAL_ERROR, "Bluetooth is disabled.");
+            } else {
+                String mydeviceaddress = bluetooth.getAddress();
+                String mydevicename = bluetooth.getName();
+                String state = "" + bluetooth.getState();
+                Log.d("Bluetooth", "myself: " + mydevicename + " : " + mydeviceaddress + " " + state);
             }
 
             Set<BluetoothDevice> pairedDevices = bluetooth.getBondedDevices();
